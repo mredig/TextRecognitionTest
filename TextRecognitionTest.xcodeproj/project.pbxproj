@@ -13,6 +13,7 @@
 		338C17E1236B7AD000B14C45 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 338C17DF236B7AD000B14C45 /* Main.storyboard */; };
 		338C17E3236B7AD200B14C45 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 338C17E2236B7AD200B14C45 /* Assets.xcassets */; };
 		338C17E6236B7AD200B14C45 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 338C17E4236B7AD200B14C45 /* LaunchScreen.storyboard */; };
+		338C17EE236B7CFF00B14C45 /* test.png in Resources */ = {isa = PBXBuildFile; fileRef = 338C17ED236B7CFF00B14C45 /* test.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,6 +25,7 @@
 		338C17E2236B7AD200B14C45 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		338C17E5236B7AD200B14C45 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		338C17E7236B7AD200B14C45 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		338C17ED236B7CFF00B14C45 /* test.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = test.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -60,6 +62,7 @@
 				338C17DB236B7AD000B14C45 /* SceneDelegate.swift */,
 				338C17DD236B7AD000B14C45 /* ViewController.swift */,
 				338C17DF236B7AD000B14C45 /* Main.storyboard */,
+				338C17ED236B7CFF00B14C45 /* test.png */,
 				338C17E2236B7AD200B14C45 /* Assets.xcassets */,
 				338C17E4236B7AD200B14C45 /* LaunchScreen.storyboard */,
 				338C17E7236B7AD200B14C45 /* Info.plist */,
@@ -126,6 +129,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				338C17E6236B7AD200B14C45 /* LaunchScreen.storyboard in Resources */,
+				338C17EE236B7CFF00B14C45 /* test.png in Resources */,
 				338C17E3236B7AD200B14C45 /* Assets.xcassets in Resources */,
 				338C17E1236B7AD000B14C45 /* Main.storyboard in Resources */,
 			);
