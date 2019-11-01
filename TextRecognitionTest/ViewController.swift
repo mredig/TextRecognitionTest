@@ -16,7 +16,6 @@ class ViewController: UIViewController {
 		// Do any additional setup after loading the view.
 		guard let image = UIImage(named: "test") else { return }
 		getText(from: image)
-
 	}
 
 	func getText(from image: UIImage) {
@@ -31,9 +30,6 @@ class ViewController: UIViewController {
 			guard let observations = request.results as? [VNRecognizedTextObservation] else { return }
 			for currentObservation in observations {
 				let topCandidate = currentObservation.topCandidates(1)
-//				print("candidates: \(topCandidates.count)")
-//				for candidate in topCandidates {
-//				}
 				if let recognizedText = topCandidate.first {
 					print(recognizedText.string)
 				}
@@ -42,7 +38,6 @@ class ViewController: UIViewController {
 		request.recognitionLevel = .accurate
 		request.revision = VNRecognizeTextRequestRevision1
 		request.usesLanguageCorrection = false
-//		request.reg
 
 		do {
 			try requestHandler.perform([request])
