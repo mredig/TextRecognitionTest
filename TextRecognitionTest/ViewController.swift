@@ -8,14 +8,42 @@
 
 import UIKit
 import Vision
+import AVFoundation
 
 class ViewController: UIViewController {
+	@IBOutlet weak var textView: UITextView!
 
-	override func viewDidLoad() {
-		super.viewDidLoad()
-		// Do any additional setup after loading the view.
-		guard let image = UIImage(named: "test") else { return }
-		getText(from: image)
+	@IBAction func pressedAddButton(_ sender: UIBarButtonItem) {
+		let authorizationStatus = AVCaptureDevice.authorizationStatus(for: .video)
+
+		switch authorizationStatus {
+		case .authorized:
+			presentImagePickerController()
+		case .notDetermined:
+			AVCaptureDevice.requestAccess(for: .video) { granted in
+				if granted {
+					DispatchQueue.main.async {
+						self.presentImagePickerController()
+					}
+				} else {
+					print("User denied camera access")
+				}
+			}
+		default:
+			NSLog("No permission for camera/photo library")
+		}
+	}
+
+	private func presentImagePickerController() {
+		guard UIImagePickerController.isSourceTypeAvailable(.camera) else {
+			NSLog("Can't access camera")
+			return
+		}
+
+		let imagePicker = UIImagePickerController()
+		imagePicker.delegate = self
+		imagePicker.sourceType = .camera
+		present(imagePicker, animated: true, completion: nil)
 	}
 
 	func getText(from image: UIImage) {
@@ -31,13 +59,16 @@ class ViewController: UIViewController {
 			for currentObservation in observations {
 				let topCandidate = currentObservation.topCandidates(1)
 				if let recognizedText = topCandidate.first {
-					print(recognizedText.string)
+//					print(recognizedText.string)
+					DispatchQueue.main.async {
+						self.textView.text += "\(recognizedText.string)\n"
+					}
 				}
 			}
 		}
 		request.recognitionLevel = .accurate
 		request.revision = VNRecognizeTextRequestRevision1
-		request.usesLanguageCorrection = false
+		request.usesLanguageCorrection = true
 
 		do {
 			try requestHandler.perform([request])
@@ -45,5 +76,15 @@ class ViewController: UIViewController {
 			NSLog("Error requesting text recognition: \(error)")
 		}
 	}
+}
 
+extension ViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+	func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+
+		picker.dismiss(animated: true)
+
+		guard let image = info[UIImagePickerController.InfoKey.originalImage] as? UIImage else { return }
+		textView.text = ""
+		getText(from: image)
+	}
 }
