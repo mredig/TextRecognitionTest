@@ -8,10 +8,17 @@
 
 import UIKit
 import Vision
+import VisionKit
 import AVFoundation
 
 class ViewController: UIViewController {
 	@IBOutlet weak var textView: UITextView!
+	@IBOutlet weak var scannedImageView: UIImageView!
+
+	@IBAction func clearButtonPressed(_ sender: UIBarButtonItem) {
+		textView.text = ""
+		scannedImageView.image = nil
+	}
 
 	@IBAction func pressedAddButton(_ sender: UIBarButtonItem) {
 		let authorizationStatus = AVCaptureDevice.authorizationStatus(for: .video)
@@ -40,10 +47,9 @@ class ViewController: UIViewController {
 			return
 		}
 
-		let imagePicker = UIImagePickerController()
-		imagePicker.delegate = self
-		imagePicker.sourceType = .camera
-		present(imagePicker, animated: true, completion: nil)
+		let docPicker = VNDocumentCameraViewController()
+		docPicker.delegate = self
+		present(docPicker, animated: true)
 	}
 
 	func getText(from image: UIImage) {
@@ -78,13 +84,19 @@ class ViewController: UIViewController {
 	}
 }
 
-extension ViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
-	func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+extension ViewController: VNDocumentCameraViewControllerDelegate {
 
-		picker.dismiss(animated: true)
-
-		guard let image = info[UIImagePickerController.InfoKey.originalImage] as? UIImage else { return }
-		textView.text = ""
-		getText(from: image)
+	func documentCameraViewController(_ controller: VNDocumentCameraViewController, didFinishWith scan: VNDocumentCameraScan) {
+		controller.dismiss(animated: true)
+		DispatchQueue.global().async {
+			for pageIndex in 0 ..< scan.pageCount {
+				let image = scan.imageOfPage(at: pageIndex)
+				DispatchQueue.main.async {
+					self.textView.text = ""
+					self.scannedImageView.image = image
+				}
+				self.getText(from: image)
+			}
+		}
 	}
 }

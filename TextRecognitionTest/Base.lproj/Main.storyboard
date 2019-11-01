@@ -22,24 +22,41 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="dgw-yA-1Pw">
+                                <rect key="frame" x="215" y="663" width="199" height="199"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="dgw-yA-1Pw" secondAttribute="height" id="wha-Ux-xMX"/>
+                                </constraints>
+                            </imageView>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
                             <constraint firstItem="T51-2r-dUd" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="8" id="Zag-ig-g1L"/>
+                            <constraint firstAttribute="trailing" secondItem="dgw-yA-1Pw" secondAttribute="trailing" id="coz-sO-xhQ"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="T51-2r-dUd" secondAttribute="trailing" constant="8" id="hF1-Ww-vQ9"/>
+                            <constraint firstItem="dgw-yA-1Pw" firstAttribute="width" secondItem="T51-2r-dUd" secondAttribute="width" multiplier="0.5" id="jDD-bL-9KO"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="dgw-yA-1Pw" secondAttribute="bottom" id="rPb-cZ-mSI"/>
                             <constraint firstItem="T51-2r-dUd" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="8" id="xqT-IA-ObA"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="T51-2r-dUd" secondAttribute="bottom" constant="8" id="yrg-9z-Bis"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                     <navigationItem key="navigationItem" id="Oqo-hw-kmb">
-                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="jgT-YQ-VKy">
-                            <connections>
-                                <action selector="pressedAddButton:" destination="BYZ-38-t0r" id="4c1-0g-1Oz"/>
-                            </connections>
-                        </barButtonItem>
+                        <rightBarButtonItems>
+                            <barButtonItem systemItem="add" id="jgT-YQ-VKy">
+                                <connections>
+                                    <action selector="pressedAddButton:" destination="BYZ-38-t0r" id="4c1-0g-1Oz"/>
+                                </connections>
+                            </barButtonItem>
+                            <barButtonItem systemItem="trash" id="wev-Uy-hRL">
+                                <connections>
+                                    <action selector="clearButtonPressed:" destination="BYZ-38-t0r" id="Tek-h4-za7"/>
+                                </connections>
+                            </barButtonItem>
+                        </rightBarButtonItems>
                     </navigationItem>
                     <connections>
+                        <outlet property="scannedImageView" destination="dgw-yA-1Pw" id="aPR-Vp-OIY"/>
                         <outlet property="textView" destination="T51-2r-dUd" id="dJL-pi-WS3"/>
                     </connections>
                 </viewController>
